@@ -12,6 +12,7 @@ import {getData, UserData, ProjectData, mockData, saveData} from "@/lib/data";
 import {useEffect, useState} from "react";
 import StatisticsNumbers from "@/components/statistics/statisticsNumbers";
 import {Calendar} from "@/components/ui/calendar";
+import LogsDrawer from "@/components/statistics/logsDrawer";
 
 export default function Page(){
   const [userData, setUserData] = useState<UserData>(mockData)
@@ -22,9 +23,11 @@ export default function Page(){
   let content;
   if(selectedProject){
     content =  (
-      <div className={"flex flex-col items-stretch"}>
-        <StatisticsNumbers/>
-        <Calendar className={"w-full"}/>
+      <div className={"w-full flex flex-col items-center space-y-4"}>
+        <StatisticsNumbers project={selectedProject}/>
+        <Calendar className={"w-fit"}/>
+
+        <LogsDrawer project={selectedProject}/>
       </div>
       )
   }else{
@@ -41,7 +44,7 @@ export default function Page(){
   return (
     <div className={"flex flex-col items-center"}>
       <Select defaultValue={projects.length>0? projects[0].name: undefined}>
-        <SelectTrigger className="w-fit">
+        <SelectTrigger className="w-fit my-4">
           <SelectValue placeholder="选择项目" />
           <span>&nbsp;&nbsp;</span>
         </SelectTrigger>
