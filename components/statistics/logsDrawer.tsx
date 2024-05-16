@@ -23,14 +23,12 @@ export default function LogsDrawer({project}: {project: ProjectData}) {
 
         <div className={"flex flex-col space-y-4"}>
           {project.logs.map((log, index)=>{
-            if(log.description.length > 0){
-              return (
-                <p key={index} className={"border-2 p-2"}>
-                  {log.description}
-                  <span className={"float-right text-sm"}>{format(log.date, "PPP")}</span>
-                </p>
-              )
-            }
+            return (
+              <p key={index} className={"border-2 p-2"}>
+                {log.description}
+                <span className={"float-right text-sm"}>{format(log.date, "PPP")}</span>
+              </p>
+            )
           })}
         </div>
         <DrawerFooter>

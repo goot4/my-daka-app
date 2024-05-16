@@ -13,8 +13,8 @@ export const mockData: UserData = {
   id: "mock",
   projects: [
     {
-      id: 'yujia',
-      name: '瑜伽',
+      id: '样例项目',
+      name: '样例项目',
       logs: [
         {date: new Date(2024,3,7).getTime(), description: ''},
         {date: new Date(2024,3,8).getTime(), description: ''},
@@ -24,14 +24,9 @@ export const mockData: UserData = {
         {date: new Date(2024,4,1).getTime(), description: 'other content'},
         {date: new Date(2024,4,10).getTime(), description: 'other content'},
         {date: new Date(2024,4,11).getTime(), description: 'other content'},
+        {date: new Date(2024,5,11).getTime(), description: 'other content'},
+        {date: new Date(2024,5,12).getTime(), description: 'other content'},
       ]
-    },
-    {
-      id: 'project 1',
-      name: 'Project 1',
-      logs: [
-        {date: new Date(2024,3,7).getTime(), description: ''},
-        {date: new Date(2024,4,1).getTime(), description: 'some content'}]
     },
   ]
 }

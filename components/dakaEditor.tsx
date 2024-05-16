@@ -18,25 +18,29 @@ import {ProjectData} from "@/lib/data";
 import * as React from "react";
 import {ChangeEvent} from "react";
 
-export default function DakaEditor({project}: {project: ProjectData}) {
+interface Props {
+  project: ProjectData,
+  dakaHandler: (project: ProjectData, date:Date, description: string)=> void
+}
+export default function DakaEditor({project, dakaHandler}: Props) {
   const [date, setDate] = React.useState<Date>(new Date())
-  const [log, setLog] = React.useState("")
+  const [description, setDescription] = React.useState("")
   const changeDate = (value:Date) => {
     setDate(value)
   }
   const changeLogHandler = (event: ChangeEvent<HTMLTextAreaElement>)=>{
-    setLog(event.target.value)
+    setDescription(event.target.value)
   }
   const enterDrawerHandler = () =>{
     setDate(new Date())
+    setDescription("")
   }
   const submitHandler = ()=>{
-    console.log(date)
-    console.log(log)
+    dakaHandler(project, date, description)
   }
   return (
     <Drawer>
-      <DrawerTrigger asChild><Button onClick={enterDrawerHandler} className={"mx-4"}>{project.name}</Button></DrawerTrigger>
+      <DrawerTrigger asChild><Button onClick={enterDrawerHandler} className={"grow ml-4 mr-2"}>{project.name}</Button></DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{project.name}</DrawerTitle>
@@ -44,7 +48,7 @@ export default function DakaEditor({project}: {project: ProjectData}) {
         </DrawerHeader>
         <div className={"flex flex-col items-center mx-4 space-y-4"}>
           <DatePicker date={date} changeDate={changeDate}/>
-          <Textarea onChange={changeLogHandler} placeholder={'这次打卡有什么需要记录的内容吗?'} className={""}/>
+          <Textarea value={description} onChange={changeLogHandler} placeholder={'这次打卡有什么需要记录的内容吗?'} className={""}/>
         </div>
 
         <DrawerFooter>
