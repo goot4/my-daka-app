@@ -29,8 +29,8 @@ export default function Page(){
       <div className={"w-full flex flex-col items-center space-y-4"}>
         <StatisticsNumbers analysis={analysis}/>
         <LogsDrawer project={selectedProject}/>
-        {/*<TimesPerMonthChart analysis={analysis}/>*/}
-        {/*<YearHeatmap analysis={analysis}/>*/}
+        <TimesPerMonthChart analysis={analysis}/>
+        <YearHeatmap analysis={analysis}/>
       </div>
       )
   }else{
