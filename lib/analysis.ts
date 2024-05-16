@@ -1,26 +1,68 @@
-import {ProjectData} from "@/lib/data";
+import {ProjectData} from "@/lib/data"
 
-// length of logs of projectData must > 0
 export class Analysis {
-  static startDate(project: ProjectData): Date {
-    const log = project.logs.reduce((oldest, current)=>{
-      return oldest.date < current.date? oldest: current
+  sortedLogs: { date: Date, description:string }[];
+  constructor(projectData: ProjectData) {
+    this.sortedLogs = projectData.logs.toSorted((a,b)=>
+      a.date - b.date).map(log => {
+        return { date: new Date(log.date), description: log.description }
     })
-    return log.date
+    console.log(this.sortedLogs)
   }
-  static finalDate(project: ProjectData): Date {
-    const log = project.logs.reduce((newest, current)=>{
-      return newest.date > current.date? newest: current
+
+  isEmpty() {
+    return this.sortedLogs.length === 0;
+  }
+  startDate(): Date {
+    return this.sortedLogs[0].date
+  }
+  finalDate(): Date {
+    return this.sortedLogs[this.sortedLogs.length-1].date
+  }
+  totalDays(): number {
+    let count=0
+    let cur = -1
+    this.sortedLogs.forEach((log)=> {
+      if(cur !== log.date.getTime()){
+        count++
+        cur = log.date.getTime()
+      }
     })
-    return log.date
+    return count
   }
-  static totalDays(projects: ProjectData): number {
-
+  highestStreak(): number {
+    let maxCount= 1, count = 1, cur = -1
+    this.sortedLogs.forEach((log)=> {
+      if(cur === log.date.getTime()){
+        return
+      }
+      if(cur + 24*60*60*1000 === log.date.getTime()){
+        cur = log.date.getTime()
+        count++
+        return
+      }
+      maxCount = maxCount>count? maxCount:count
+      count = 1
+      cur = log.date.getTime()
+    })
+    return maxCount
   }
-  static highestStreak(projects: ProjectData): number {
-
+  timesForMonth(year:number, monthIndex:number): number {
+    let count=0
+    this.sortedLogs.forEach((log)=>{
+      if(log.date.getFullYear()===year && log.date.getMonth()===monthIndex){
+        count++
+      }
+    })
+    return count
   }
-  static timesThisMonth(projects: ProjectData): number {
-
+  timesForDate(date: Date): number {
+    let count=0
+    this.sortedLogs.forEach((log)=> {
+      if(log.date.getTime()===date.getTime()){
+        count++
+      }
+    })
+    return count
   }
 }

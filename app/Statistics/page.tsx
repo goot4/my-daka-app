@@ -13,6 +13,9 @@ import {useEffect, useState} from "react";
 import StatisticsNumbers from "@/components/statistics/statisticsNumbers";
 import {Calendar} from "@/components/ui/calendar";
 import LogsDrawer from "@/components/statistics/logsDrawer";
+import {Analysis} from "@/lib/analysis";
+import TimesPerMonthChart from "@/components/statistics/timesPerMonthChart";
+import YearHeatmap from "@/components/statistics/yearHeatmap";
 
 export default function Page(){
   const [userData, setUserData] = useState<UserData>(mockData)
@@ -22,12 +25,13 @@ export default function Page(){
 
   let content;
   if(selectedProject){
+    const analysis = new Analysis(selectedProject)
     content =  (
       <div className={"w-full flex flex-col items-center space-y-4"}>
-        <StatisticsNumbers project={selectedProject}/>
-        <Calendar className={"w-fit"}/>
-
+        <StatisticsNumbers analysis={analysis}/>
         <LogsDrawer project={selectedProject}/>
+        <TimesPerMonthChart analysis={analysis}/>
+        <YearHeatmap analysis={analysis}/>
       </div>
       )
   }else{
@@ -42,8 +46,8 @@ export default function Page(){
   }, []);
 
   return (
-    <div className={"flex flex-col items-center"}>
-      <Select defaultValue={projects.length>0? projects[0].name: undefined}>
+    <div className={"flex flex-col items-center mb-20"}>
+      <Select onValueChange={valueChangeHandler} value={selectedProject?.name}>
         <SelectTrigger className="w-fit my-4">
           <SelectValue placeholder="选择项目" />
           <span>&nbsp;&nbsp;</span>
@@ -58,5 +62,9 @@ export default function Page(){
       {content}
     </div>
   )
+
+  function valueChangeHandler(value: string) {
+    setSelectedProject(projects.find(project => project.name===value))
+  }
 
 }

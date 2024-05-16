@@ -6,7 +6,7 @@ export type UserData = {
 export type ProjectData = {
   id: string;
   name: string;
-  logs: { date: Date; description:string }[];
+  logs: { date: number; description:string }[];
 }
 
 export const mockData: UserData = {
@@ -16,22 +16,22 @@ export const mockData: UserData = {
       id: 'yujia',
       name: '瑜伽',
       logs: [
-        {date: new Date(2024,3,7), description: ''},
-        {date: new Date(2024,3,8), description: ''},
-        {date: new Date(2024,3,9), description: ''},
-        {date: new Date(2024,3,10), description: ''},
-        {date: new Date(2024,4,1), description: 'some content'},
-        {date: new Date(2024,4,1), description: 'other content'},
-        {date: new Date(2024,4,10), description: 'other content'},
-        {date: new Date(2024,4,11), description: 'other content'},
+        {date: new Date(2024,3,7).getTime(), description: ''},
+        {date: new Date(2024,3,8).getTime(), description: ''},
+        {date: new Date(2024,3,9).getTime(), description: ''},
+        {date: new Date(2024,3,10).getTime(), description: ''},
+        {date: new Date(2024,4,1).getTime(), description: 'some content'},
+        {date: new Date(2024,4,1).getTime(), description: 'other content'},
+        {date: new Date(2024,4,10).getTime(), description: 'other content'},
+        {date: new Date(2024,4,11).getTime(), description: 'other content'},
       ]
     },
     {
       id: 'project 1',
       name: 'Project 1',
       logs: [
-        {date: new Date(2024,3,7), description: ''},
-        {date: new Date(2024,4,1), description: 'some content'}]
+        {date: new Date(2024,3,7).getTime(), description: ''},
+        {date: new Date(2024,4,1).getTime(), description: 'some content'}]
     },
   ]
 }

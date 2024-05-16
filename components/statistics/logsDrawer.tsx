@@ -9,6 +9,7 @@ import {
 import {Button} from "@/components/ui/button";
 import * as React from "react";
 import {ProjectData} from "@/lib/data";
+import {format} from "date-fns";
 
 export default function LogsDrawer({project}: {project: ProjectData}) {
   return (
@@ -20,12 +21,18 @@ export default function LogsDrawer({project}: {project: ProjectData}) {
           <DrawerDescription></DrawerDescription>
         </DrawerHeader>
 
-        {project.logs.map((log, index)=>{
-          return (
-            <p key={index} className={"border-2"}>{log.description}</p>
-          )
-        })}
-
+        <div className={"flex flex-col space-y-4"}>
+          {project.logs.map((log, index)=>{
+            if(log.description.length > 0){
+              return (
+                <p key={index} className={"border-2 p-2"}>
+                  {log.description}
+                  <span className={"float-right text-sm"}>{format(log.date, "PPP")}</span>
+                </p>
+              )
+            }
+          })}
+        </div>
         <DrawerFooter>
 
         </DrawerFooter>

@@ -3,18 +3,19 @@ import {Analysis} from "@/lib/analysis";
 import {format} from "date-fns";
 
 
-export default function StatisticsNumbers({project}: {project: ProjectData}){
-  if(project.logs.length === 0 ){
+export default function StatisticsNumbers({analysis}: {analysis: Analysis}){
+  if(analysis.isEmpty()){
     return (
       <h2>无数据</h2>
     )
   }
 
-  const startDate = Analysis.startDate(project)
-  const finalDate = Analysis.finalDate(project)
-  const totalDays = Analysis.totalDays(project)
-  const highestStreak = Analysis.highestStreak(project)
-  const timesThisMonth = Analysis.timesThisMonth(project)
+  const now = new Date()
+  const startDate = analysis.startDate()
+  const finalDate = analysis.finalDate()
+  const totalDays = analysis.totalDays()
+  const highestStreak = analysis.highestStreak()
+  const timesThisMonth = analysis.timesForMonth(now.getFullYear(),now.getMonth())
 
   return (
     <div className={""}>
