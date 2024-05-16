@@ -1,4 +1,3 @@
-"use client"
 
 import * as React from "react"
 import { format } from "date-fns"
@@ -13,7 +12,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-import {SelectSingleEventHandler} from "react-day-picker";
 
 export function DatePicker({date, changeDate}: {date: Date, changeDate: (date: Date) => void}) {
   function selectHandler (value: Date|undefined){
