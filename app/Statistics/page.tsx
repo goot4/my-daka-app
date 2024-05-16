@@ -8,10 +8,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-import {getData, UserData, ProjectData, mockData, saveData} from "@/lib/data";
+import {getData, UserData, ProjectData, mockData} from "@/lib/data";
 import {useEffect, useState} from "react";
 import StatisticsNumbers from "@/components/statistics/statisticsNumbers";
-import {Calendar} from "@/components/ui/calendar";
 import LogsDrawer from "@/components/statistics/logsDrawer";
 import {Analysis} from "@/lib/analysis";
 import TimesPerMonthChart from "@/components/statistics/timesPerMonthChart";
@@ -30,8 +29,8 @@ export default function Page(){
       <div className={"w-full flex flex-col items-center space-y-4"}>
         <StatisticsNumbers analysis={analysis}/>
         <LogsDrawer project={selectedProject}/>
-        <TimesPerMonthChart analysis={analysis}/>
-        <YearHeatmap analysis={analysis}/>
+        {/*<TimesPerMonthChart analysis={analysis}/>*/}
+        {/*<YearHeatmap analysis={analysis}/>*/}
       </div>
       )
   }else{
